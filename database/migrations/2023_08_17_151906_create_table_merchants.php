@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('balance', 10)->comment('Merchant balance');
 
             $table->string('name',128)
-                    ->index('merchants-name-index')
+                    ->unique('merchants-name-index')
                     ->comment('Merchant name');
 
             $table->tinyInteger('status')
