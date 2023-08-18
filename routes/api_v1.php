@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\v1\AuthController;
 use App\Http\Controllers\v1\MerchantsController;
+use App\Http\Controllers\v1\ShopsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,5 +31,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ->name('merchant.delete')
         ->where('id', '[0-9]+');
 
+
+
+    Route::get('/shop/index', [ShopsController::class, 'index'])->name('shop.index');
+    Route::post('/shop/store', [ShopsController::class, 'store'])->name('shop.store');
+
+    Route::get('/shop/show/{id}', [ShopsController::class, 'show'])
+        ->name('shop.show')
+        ->where('id', '[0-9]+');
 });
 

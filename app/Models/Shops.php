@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Enums\ShopStatus;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,4 +38,13 @@ use Illuminate\Support\Carbon;
 class Shops extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    // Convert/Cast response format
+    protected $casts = [
+        'created_at' => 'datetime:d.m.Y H:i',
+        'updated_at' => 'datetime:d.m.Y H:i',
+        'status' => ShopStatus::class
+    ];
 }

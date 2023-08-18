@@ -43,6 +43,7 @@ class MerchantsController extends Controller
         return $this->success(new MerchantCollection($result));
     }
 
+
     /**
      * Create or get merchant
      *
@@ -54,8 +55,8 @@ class MerchantsController extends Controller
         $merchant = Merchants::firstOrCreate(['user_id' => Auth::id()],
          [
             'name'    => $request->input('name'),
-            'balance' => $request->integer('balance'),
-            'status'  => $request->integer('status'),
+            'balance' => $request->input('balance'),
+            'status'  => $request->input('status'),
         ]);
 
         return $this->success($merchant);
@@ -73,8 +74,8 @@ class MerchantsController extends Controller
         $merchant = Merchants::where('user_id', Auth::id())->update(
             [
                 'name'    => $request->input('name'),
-                'balance' => $request->integer('balance'),
-                'status'  => $request->integer('status'),
+                'balance' => $request->input('balance'),
+                'status'  => $request->input('status'),
             ]);
 
         if($merchant){
