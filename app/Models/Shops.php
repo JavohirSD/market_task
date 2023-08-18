@@ -57,7 +57,7 @@ class Shops extends Model
      * @param int $precision
      * @return float
      */
-    public function calculateDistance(float $latitude,float $longitude,int $precision = 3): float
+    public function getDistance(float $latitude,float $longitude,int $precision = 3): float
     {
         $latDiff  = deg2rad($latitude - $this->latitude);
         $longDiff = deg2rad($longitude - $this->longitude);

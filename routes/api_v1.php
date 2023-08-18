@@ -19,36 +19,38 @@ Route::post('/auth/login', [AuthController::class,'login'])->name('login');
 Route::post('/auth/register', [AuthController::class,'register'])->name('register');
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/merchant/index', [MerchantsController::class, 'index'])->name('merchant.index');
-    Route::post('/merchant/store', [MerchantsController::class, 'store'])->name('merchant.store');
-    Route::post('/merchant/update', [MerchantsController::class, 'update'])->name('merchant.update');
 
-    Route::get('/merchant/show/{id}', [MerchantsController::class, 'show'])
-        ->name('merchant.show')
-        ->where('id', '[0-9]+');
+    Route::prefix('merchant')->group(function () {
+        Route::get('index',   [MerchantsController::class, 'index'])->name('merchant.index');
+        Route::post('store',  [MerchantsController::class, 'store'])->name('merchant.store');
+        Route::post('update', [MerchantsController::class, 'update'])->name('merchant.update');
 
-    Route::delete('/merchant/delete/{id}', [MerchantsController::class, 'delete'])
-        ->name('merchant.delete')
-        ->where('id', '[0-9]+');
+        Route::get('show/{id}', [MerchantsController::class, 'show'])
+            ->name('merchant.show')
+            ->where('id', '[0-9]+');
 
-
-
-    Route::get('/shop/index', [ShopsController::class, 'index'])->name('shop.index');
-    Route::post('/shop/store', [ShopsController::class, 'store'])->name('shop.store');
-    Route::get('/shop/nearest', [ShopsController::class, 'nearestShops'])->name('shop.nearest');
-
-    Route::get('/shop/show/{id}', [ShopsController::class, 'show'])
-        ->name('shop.show')
-        ->where('id', '[0-9]+');
-
-    Route::post('/shop/update/{id}', [ShopsController::class, 'update'])
-        ->name('shop.update')
-        ->where('id', '[0-9]+');
-
-    Route::delete('/shop/delete/{id}', [ShopsController::class, 'delete'])
-        ->name('shop.delete')
-        ->where('id', '[0-9]+');
+        Route::delete('delete/{id}', [MerchantsController::class, 'delete'])
+             ->name('merchant.delete')
+             ->where('id', '[0-9]+');
+    });
 
 
+    Route::prefix('shop')->group(function () {
+        Route::post('store',  [ShopsController::class, 'store'])->name('shop.store');
+        Route::get('index',   [ShopsController::class, 'index'])->name('shop.index');
+        Route::get('nearest', [ShopsController::class, 'nearestShops'])->name('shop.nearest');
+
+        Route::get('show/{id}', [ShopsController::class, 'show'])
+             ->name('shop.show')
+             ->where('id', '[0-9]+');
+
+        Route::post('update/{id}', [ShopsController::class, 'update'])
+             ->name('shop.update')
+             ->where('id', '[0-9]+');
+
+        Route::delete('delete/{id}', [ShopsController::class, 'delete'])
+             ->name('shop.delete')
+             ->where('id', '[0-9]+');
+    });
 });
 

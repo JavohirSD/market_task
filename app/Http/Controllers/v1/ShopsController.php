@@ -57,7 +57,7 @@ class ShopsController extends Controller
         $merchant_id = Auth::user()?->merchant?->id;
 
         if($merchant_id === null){
-            return $this->error(null,'Please create merchant first');
+            return $this->error(null,'Please create merchant first',Response::HTTP_BAD_REQUEST);
         }
 
         $merchant = Shops::create([
@@ -69,7 +69,7 @@ class ShopsController extends Controller
             'status'     => $request->input('status')
         ]);
 
-        return $this->success($merchant);
+        return $merchant ? $this->success($merchant,'Success',Response::HTTP_CREATED) : $this->error(null,'Error occurred');
     }
 
 
@@ -182,7 +182,7 @@ class ShopsController extends Controller
         }
 
         foreach ($shops as $shop) {
-            $shop->distance = $shop->calculateDistance($request->input('latitude'), $request->input('longitude')) . ' km';
+            $shop->distance = $shop->getDistance($request->input('latitude'), $request->input('longitude')) . ' km';
         }
 
         return $this->success($shops->sortBy('distance'));

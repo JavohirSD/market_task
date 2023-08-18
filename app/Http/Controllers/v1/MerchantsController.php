@@ -59,7 +59,7 @@ class MerchantsController extends Controller
             'status'  => $request->input('status'),
         ]);
 
-        return $this->success($merchant);
+        return $this->success($merchant,'Success', Response::HTTP_CREATED);
     }
 
 
