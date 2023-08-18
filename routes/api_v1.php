@@ -35,9 +35,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/shop/index', [ShopsController::class, 'index'])->name('shop.index');
     Route::post('/shop/store', [ShopsController::class, 'store'])->name('shop.store');
+    Route::get('/shop/nearest', [ShopsController::class, 'nearestShops'])->name('shop.nearest');
 
     Route::get('/shop/show/{id}', [ShopsController::class, 'show'])
         ->name('shop.show')
         ->where('id', '[0-9]+');
+
+    Route::post('/shop/update/{id}', [ShopsController::class, 'update'])
+        ->name('shop.update')
+        ->where('id', '[0-9]+');
+
+    Route::delete('/shop/delete/{id}', [ShopsController::class, 'delete'])
+        ->name('shop.delete')
+        ->where('id', '[0-9]+');
+
+
 });
 

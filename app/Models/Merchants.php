@@ -50,6 +50,6 @@ class Merchants extends Model
 
     public function shops(): HasMany
     {
-        return $this->hasMany(Shops::class);
+        return $this->hasMany(Shops::class,'merchant_id','id');
     }
 }

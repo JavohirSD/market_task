@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreShopRequest extends FormRequest
+class NearestShopRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,9 @@ class StoreShopRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address'   => 'required|string||min:2|max:255',
-            'schedule'  => 'required|string||min:2|max:128',
-            'latitude'  => 'required|numeric|between:-90,90',
-            'longitude' => 'required|numeric|between:-180,180',
-            'status'    => 'required|numeric|digits:1,2',
+            'merchant_id' => 'required|numeric|exists:merchants,id',
+            'latitude'    => 'required|numeric|between:-90,90',
+            'longitude'   => 'required|numeric|between:-180,180',
         ];
     }
 }

@@ -47,4 +47,25 @@ class Shops extends Model
         'updated_at' => 'datetime:d.m.Y H:i',
         'status' => ShopStatus::class
     ];
+
+
+    /**
+     * Calculate distance
+     *
+     * @param float $latitude
+     * @param float $longitude
+     * @param int $precision
+     * @return float
+     */
+    public function calculateDistance(float $latitude,float $longitude,int $precision = 3): float
+    {
+        $latDiff  = deg2rad($latitude - $this->latitude);
+        $longDiff = deg2rad($longitude - $this->longitude);
+
+        $a = sin($latDiff / 2) * sin($latDiff / 2) +
+             cos(deg2rad($this->latitude)) * cos(deg2rad($latitude)) *
+             sin($longDiff / 2) * sin($longDiff / 2);
+
+        return round((12742 * atan2(sqrt($a), sqrt(1 - $a))),$precision);
+    }
 }

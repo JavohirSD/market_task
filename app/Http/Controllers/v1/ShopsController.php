@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Enums\ShopStatus;
+use App\Http\Requests\NearestShopRequest;
 use App\Http\Requests\StoreMerchant;
 use App\Http\Requests\StoreShopRequest;
 use App\Http\Resources\MerchantCollection;
@@ -163,5 +164,27 @@ class ShopsController extends Controller
     public function findModel(int $id): Model|Collection|Shops|array|null
     {
         return Shops::find($id);
+    }
+
+
+    /**
+     * Get shops by distance
+     *
+     * @param NearestShopRequest $request
+     * @return JsonResponse
+     */
+    public function nearestShops(NearestShopRequest $request): JsonResponse
+    {
+        $shops = Merchants::find($request->input('merchant_id'))?->shops;
+
+        if(count($shops) === 0){
+            return $this->error(null,'No shops found for this merchant', Response::HTTP_NOT_FOUND);
+        }
+
+        foreach ($shops as $shop) {
+            $shop->distance = $shop->calculateDistance($request->input('latitude'), $request->input('longitude')) . ' km';
+        }
+
+        return $this->success($shops->sortBy('distance'));
     }
 }
