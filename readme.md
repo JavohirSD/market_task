@@ -30,16 +30,21 @@ For the first time it will take long time depending on your network speed and ha
 
 Starting container
 
+
 5. ```docker-compose up -d nginx mysql workspace ```
 
 
 
 Get list of running containers:
 
+
 ```docker-compose ps```
 
 
 Stop all containers:
+
+
+
 6. ```docker-compose down```
 
 
