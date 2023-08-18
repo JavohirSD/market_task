@@ -27,10 +27,15 @@ For the first time it will take long time depending on your network speed and ha
 
 4. ```cd laradock```
 
+
 Starting container
+
 5. ```docker-compose up -d nginx mysql workspace ```
 
+
+
 Get list of running containers:
+
 ```docker-compose ps```
 
 
