@@ -17,19 +17,25 @@ https://documenter.getpostman.com/view/9645611/2s9Y5SVkgX
 
 For the first time it will take long time depending on your network speed and hardware (up to 10 minutes) to build all images.
 
+1. ```git clone https://github.com/Laradock/laradock.git```
 
-1. ```cd laradock```
+
+2. ```cp .env.example .env```
+
+
+3. Change PHP_VERSION to 8.1
+
+4. ```cd laradock```
 
 Starting container
-2. ```docker-compose up -d nginx mysql workspace ```
+5. ```docker-compose up -d nginx mysql workspace ```
 
 Get list of running containers:
 ```docker-compose ps```
 
 
 Stop all containers:
-3. ```docker-compose down```
-
+6. ```docker-compose down```
 
 
 Project will run in ```http://localhost```
